@@ -1,0 +1,44 @@
+<div class="dd" id="nestable">
+  <ol class="dd-list">
+    <!--BTN_MENU-->                                  
+    <li class="dd-item" data-id="{menu-clavelin}">
+        <div class="dd-handle">{menu-denominacion}</div>
+        <!--BTN_SUBMENU-->
+        <ol class="dd-list">
+            <li class="dd-item" data-id="{submenu-clavelin}">
+                <div class="dd-handle">{submenu-denominacion}</div>
+                <div class="pull-right" style="margin-top: -31px; padding-left: 88%; position: absolute;">
+                  <button class="btn btn-danger btn-xs" onClick="location.href='{url_app}/configuracionmenu/quitar_submenu/{configuracionmenu-configuracionmenu_id}@{submenu-submenu_id}'" style="position: absolute;"><i class="fa fa-trash-o "></i></button>
+                </div>
+                <!--BTN_ITEM-->
+                <ol class="dd-list">
+                  <li class="dd-item" data-id="{item-clavelin}">
+                    <div class="dd-handle">
+                      {item-denominacion}
+                    </div>
+                    <div class="pull-right" style="margin-top: -31px; padding-left: 86.5%; position: absolute;">
+                      <button class="btn btn-danger btn-xs" onClick="location.href='{url_app}/configuracionmenu/quitar_item/{configuracionmenu-configuracionmenu_id}@{item-item_id}'" style="position: absolute;"><i class="fa fa-trash-o "></i></button>
+                    </div>
+                  </li>
+                </ol>
+                <!--BTN_ITEM-->
+            </li>
+        </ol>
+        <!--BTN_SUBMENU-->
+    </li>
+    <!--BTN_MENU-->                                  
+  </ol>
+</div>
+<script src="{url_static}assets/nestable/jquery.nestable.js"></script>
+<script >
+  var Nestable = function () {
+    
+    var e = $('#nestable').data('output', $('#nestable_list_output'));
+    var list = e.length ? e : $(e.target),
+    output = list.data('output');
+    output.val(window.JSON.stringify(list.nestable('serialize'))); 
+    
+    $('.dd').nestable('collapseAll');
+    $('#nestable').nestable();
+  }();
+</script>

@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteRule !(^static) controller.php
+
+php_value session.gc_maxlifetime 14400
+php_value session.cookie_lifetime 14400
+php_value upload_max_filesize 40M
+php_value post_max_size 40M
+php_value max_execution_time 180

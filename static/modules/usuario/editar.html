@@ -1,0 +1,116 @@
+<!--DATA TABLE-->
+<link href="{url_static}assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+<link rel="stylesheet" href="{url_static}assets/data-tables/DT_bootstrap.css" />
+<script type="text/javascript" language="javascript" src="{url_static}assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="{url_static}assets/data-tables/DT_bootstrap.js"></script>
+<!--DATA TABLE-->
+<div class="col-lg-4">
+    <section class="panel panel-primary">
+        <header class="panel-heading">
+            <i class="fa fa-plus-square"></i>&nbsp;&nbsp; Editar usuario
+        </header>
+        <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class=" form">
+                    <form class="form" id="formulario_guardar" method="post" action="{url_app}/usuario/actualizar">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="{usuariodetalle-nombre}" onKeypress="if ((event.keyCode != 32) && (event.keyCode < 65) || (event.keyCode > 90) && (event.keyCode < 97) || (event.keyCode > 122)) event.returnValue = false;" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Apellido</label>
+                            <input type="text" class="form-control" name="apellido" id="apellido" value="{usuariodetalle-apellido}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Usuario</label>
+                            <input type="text" class="form-control" name="denominacion" id="denominacion" value="{usuario-denominacion}" readonly>
+                            <div class="form-group col-lg-12" id="div_error_usuario"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Menú</label>
+                            <select class="form-control m-bot15" name="configuracionmenu" required>
+                                <option value="{configuracionmenu-configuracionmenu_id}">{configuracionmenu-denominacion}</option>
+                                {slt_configuracionmenu}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Gerenica (Dpto)</label>
+                            <select class="form-control m-bot15" name="centrocosto" required>
+                                <option value="{centrocosto-centrocosto_id}">{centrocosto-denominacion}</option>
+                                {slt_centrocosto}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Distrito</label>
+                            <select class="form-control m-bot15" name="unicom" required>
+                                {slt_unicom}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input type="mail" class="form-control" name="correoelectronico" value="{usuariodetalle-correoelectronico}" required>
+                            <div class="form-group col-lg-12" id="div_error_usuario"></div>
+                        </div>
+                        <div class="col-lg-12" style="margin-top: 2%;" align="right">
+                            <input type="hidden" name="usuario_id" value="{usuario-usuario_id}">
+                            <input type="hidden" name="usuariodetalle_id" value="{usuariodetalle-usuariodetalle_id}">
+                            <input type="hidden" name="token" value="{usuariodetalle-token}">
+                            <input type="hidden" name="nivel" value="1">
+                            <button class="btn btn-danger" type="button" onclick="confirma_formulario(2, '')"><i class="fa fa-edit"></i> Editar </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-lg-8">
+    <section class="panel panel-success">
+        <header class="panel-heading"><i class="fa fa-table"></i>&nbsp;&nbsp; Listado de usuarios</header>
+        <div class="panel-body">
+            <div class="adv-table">
+                <table class="display table table-bordered table-striped" id="tbl_usuario">
+                    <thead>
+                        <tr>
+                            <th>Apellido, Nombre</th>
+                            <th>Usuario</th>
+                            <th>Gerencia (Dpto)</th>
+                            <th>Correo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--TABLA_USUARIO-->
+                        <tr>
+                            <td>{usuariodetalle-apellido}, {usuariodetalle-nombre}</td>
+                            <td>{usuario-denominacion}</td>
+                            <td><strong>{gerencia-denominacion}</strong> ({centrocosto-denominacion})</td>
+                            <td>{usuariodetalle-correoelectronico}</td>
+                            <td>
+                                <center>
+                                    <button class="btn btn-primary btn-xs" title="Blanquear Pass" onclick="location.href='{url_app}/usuario/regenerar_token/{usuario-usuario_id}'"><i class="fa fa-retweet"></i></button>
+                                    <button class="btn btn-warning btn-xs" onclick="confirma_formulario(3, '{url_app}/usuario/editar/{usuario-usuario_id}');" title="Editar Usuario"><i class="fa fa-edit"></i></button>
+                                </center>
+                            </td>
+                        </tr>
+                        <!--TABLA_USUARIO-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-lg-12" align="right">
+    <button type="button" class="btn btn-info"  onclick="location.href='{url_app}/usuario/panel';">
+        <i class="fa fa-chevron-circle-left"></i> Volver a panel Usuario 
+    </button>
+</div>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        $('#tbl_usuario').dataTable( {
+            "aaSorting": [[ 0, "asc" ]]
+          , "iDisplayLength":10
+        } );
+    } );
+</script>

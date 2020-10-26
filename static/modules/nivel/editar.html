@@ -1,0 +1,79 @@
+<!--DATA TABLE-->
+<link href="{url_static}assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+<link rel="stylesheet" href="{url_static}assets/data-tables/DT_bootstrap.css" />
+<script type="text/javascript" language="javascript" src="{url_static}assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="{url_static}assets/data-tables/DT_bootstrap.js"></script>
+<!--DATA TABLE-->
+<div class="col-lg-12">
+    <ul class="breadcrumb">
+        <li><a href="{url_app}/usuario/{panel_general}"><i class="fa fa-home"></i> Panel</a></li>
+        <li><a href="{url_app}/{objeto}/{panel_objeto}">Panel Niveles</a></li>
+    </ul>
+</div>
+<div class="col-lg-4">
+    <section class="panel panel-primary">
+        <header class="panel-heading">
+            <i class="fa fa-edit"></i>&nbsp;&nbsp; Editar Nivel
+        </header>
+        <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class=" form">
+                    <form class="form" id="formulario_guardar" method="post" action="{url_app}/nivel/guardar">
+                        <div class="form-group">
+                            <label>Denominación</label>
+                            <input type="text" class="form-control" id="denominacion" name="denominacion" value="{nivel-denominacion}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nivel</label>
+                            <input type="text" class="form-control" id="nivel" name="nivel" value="{nivel-nivel}" required>
+                        </div>
+                        <div class="col-lg-12" style="margin-top: 2%;" align="right">
+                            <input type="hidden" name="nivel_id" value="{nivel-nivel_id}">
+                            <button class="btn btn-danger" type="button" onclick="confirma_formulario(2, '')"><i class="fa fa-edit"></i> Editar </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-lg-8">
+    <section class="panel panel-success">
+        <header class="panel-heading"><i class="fa fa-table"></i>&nbsp;&nbsp; Listado de Niveles</header>   
+        <div class="panel-body">
+            <div class="adv-table">
+                <table class="display table table-bordered table-striped" id="tbl_nivel">
+                    <thead>
+                        <tr>
+                            <th>Denominación</th>
+                            <th>Nivel</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--TBL_NIVEL-->
+                        <tr>
+                            <td>{nivel-denominacion}</td>
+                            <td>{nivel-nivel}</td>
+                            <td>
+                                <center>
+                                    <button class="btn btn-warning btn-xs" onclick="confirma_formulario(3, '{url_app}/nivel/editar/{nivel-nivel_id}');" title="Editar Nivel"><i class="fa fa-edit"></i></button>
+                                </center>
+                            </td>
+                        </tr>
+                        <!--TBL_NIVEL-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        $('#tbl_nivel').dataTable( {
+            "aaSorting": [[ 0, "asc" ]]
+          , "iDisplayLength":10
+        } );
+    } );
+</script>

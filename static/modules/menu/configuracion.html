@@ -1,0 +1,120 @@
+<link rel="stylesheet" type="text/css" href="{url_static}assets/nestable/jquery.nestable.css" />
+<script type="text/javascript">
+  function traerTercerNivel(menu_id) {
+    var traer_tercer_nivel = $.ajax({
+      url: '{url_app}/configuracionmenu/ajax_traer_tercer_nivel/' + menu_id,
+        dataType: 'text',
+        async: false
+    }).responseText;
+    document.getElementById("div_tercer_nivel").innerHTML = traer_tercer_nivel;
+    document.getElementById("section_segundo_nivel").style.display = 'block';
+  }
+
+  function show_form_ordenar() {
+    document.getElementById("div_vista_configuracionmenu").style.display = 'none'; 
+    document.getElementById("div_form_ordenar_menu").style.display = 'block'; 
+  }
+
+  function show_vista_configuracionmenu() {
+    document.getElementById("div_form_ordenar_menu").style.display = 'none'; 
+    document.getElementById("div_vista_configuracionmenu").style.display = 'block'; 
+  }
+</script>
+<div class="col-lg-4">
+  <aside class="profile-nav alt green-border">
+    <section class="panel">
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="javascript:;"> <i class="fa fa-clock-o"></i> {configuracionmenu-denominacion}</a></li>
+        <li><a href="javascript:;"> <i class="fa fa-calendar"></i> {configuracionmenu-nivel_denominacion}</a></li>
+        <li><a href="javascript:;"> <i class="fa fa-bell-o"></i> {gerencia-denominacion}</a></li>
+      </ul>
+    </section>
+  </aside>
+  <section class="panel panel-primary">
+    <header class="panel-heading">
+      Configurar Menú
+    </header>
+    <div class="panel-body">  
+      <label class="col-lg-12">1er nivel</label>
+      <div class="col-lg-12">        
+        {opt_menu}          
+      </div>
+    </div>
+  </section>
+  <section class="panel panel-info" id="section_segundo_nivel" style="display: none;">
+    <header class="panel-heading">
+      Seleccionar ítems de 2do nivel
+    </header>
+    <div class="panel-body">
+      <form class="form-horizontal tasi-form" id="formulario_guardar" method="post" action="{url_app}/configuracionmenu/guardar_item">
+        <label class="col-lg-12">Ítems</label>
+        <div class="col-lg-12" id="div_tercer_nivel">
+          <div class="form-group">
+            <div class="col-lg-10">
+              {chk_segundo_nivel}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12" style="margin-top: 2%;" align="right">
+          <input type="hidden" name="configuracionmenu_id" value="{configuracionmenu-configuracionmenu_id}">
+          <button class="btn btn-info" type="submit"><i class="fa fa-arrow-circle-o-right"></i> Continuar </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+<div class="col-lg-5" id="div_vista_configuracionmenu">
+  <section class="panel panel-info" id="section_segundo_nivel">
+    <header class="panel-heading">
+      Vista Configuración de Menú
+    </header>
+    <div class="panel-body">
+      <div class="col-lg-8">
+          {vista_configuracionmenu}        
+      </div>
+      <!--
+      <div class="col-lg-4">
+        <div class="row state-overview">
+          <a href="#" onClick="show_form_ordenar();">
+            <section class="panel">
+              <div class="symbol terques" style="width: 100%;">
+                <i class="fa fa-sort-numeric-asc"></i>
+                <h3 style="margin-top: 10%; color: #FFF;"><strong>Ordenar Menú</strong></h3>
+              </div>
+            </section> 
+          </a>
+        </div>
+      </div>
+      -->
+    </div>
+  </section>
+</div>
+<div class="col-lg-5" id="div_form_ordenar_menu" style="display: none;">
+  <section class="panel panel-info" id="section_segundo_nivel">
+    <header class="panel-heading">
+      Ordenar Menú
+    </header>
+    <div class="panel-body">
+      <div class="col-lg-8">
+          {vista_configuracionmenu}        
+      </div>
+      <div class="col-lg-4">
+        <div class="row state-overview">
+          
+          <a href="#" onClick="show_form_ordenar();">
+            <section class="panel">
+              <div class="symbol terques" style="width: 100%;">
+                <i class="fa fa-save"></i>
+                <h3 style="margin-top: 10%; color: #FFF;"><strong>Guardar Orden</strong></h3>
+              </div>
+            </section> 
+          </a>
+          
+        </div>
+        <button type="button" class="btn btn-info" style="width: 100%;" onClick="show_vista_configuracionmenu();"><i class="fa fa-caret-square-o-left"></i> Volver</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+

@@ -1,0 +1,86 @@
+<!--DATA TABLE-->
+<link href="{url_static}assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+<link rel="stylesheet" href="{url_static}assets/data-tables/DT_bootstrap.css" />
+<script type="text/javascript" language="javascript" src="{url_static}assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="{url_static}assets/data-tables/DT_bootstrap.js"></script>
+<!--DATA TABLE-->
+<div class="col-lg-12">
+    <ul class="breadcrumb">
+        <li><a href="{url_app}/usuario/{panel_general}"><i class="fa fa-home"></i> Panel</a></li>
+        <li><a href="{url_app}/{objeto}/{panel_objeto}">Panel Configuración</a></li>
+    </ul>
+</div>
+<div class="col-lg-4">
+    <section class="panel panel-primary">
+        <header class="panel-heading">
+            <i class="fa fa-edit"></i>&nbsp;&nbsp; Editar Configuración
+        </header>
+        <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class=" form">
+                    <form class="form" id="formulario_guardar" method="post" action="{url_app}/configuracion/guardar">
+                        <div class="form-group">
+                            <label>Importe</label>
+                            <input type="text" class="form-control" id="importe_aprobacion" name="nomenclatura" value="{configuracion-importe_aprobacion}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Aprobador Mayor</label>
+                            <input type="text" class="form-control" id="aprobador_mayor_importe" name="denominacion" value="{configuracion-aprobador_mayor_importe}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Aprobador Menor</label>
+                            <input type="text" class="form-control" id="aprobador_menor_importe" name="denominacion" value="{configuracion-aprobador_menor_importe}" required>
+                        </div>
+                        <div class="col-lg-12" style="margin-top: 2%;" align="right">
+                            <input type="hidden" name="configuracion_id" value="{configuracion-configuracion_id}">
+                            <button class="btn btn-danger" type="button" onclick="confirma_formulario(2, '')"><i class="fa fa-edit"></i> Editar </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-lg-8">
+    <section class="panel panel-success">
+        <header class="panel-heading"><i class="fa fa-table"></i>&nbsp;&nbsp; Listado de Configuración</header>
+        <div class="panel-body">
+            <div class="adv-table">
+                <table class="display table table-bordered table-striped" id="tbl_configuracion">
+                    <thead>
+                        <tr>
+                            <th>Importe</th>
+                            <th>Aprobador Mayor</th>
+                            <th>Aprobador Menor</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--TBL_CONFIGURACION-->
+                        <tr>
+                            <td>{configuracion-importe_aprobacion}</td>
+                            <td>{configuracion-aprobador_mayor_importe}</td>
+                            <td>{configuracion-aprobador_menor_importe}</td>
+                            <td>
+                                <center>
+                                    <button class="btn btn-warning btn-xs" onclick="confirma_formulario(3, '{url_app}/configuracion/editar/{configuracion-configuracion_id}');" title="Editar Distrito"><i class="fa fa-edit"></i></button>
+                                </center>
+                            </td>
+                        </tr>
+                        <!--TBL_CONFIGURACION-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        $('#tbl_configuracion').dataTable( {
+            "aaSorting": [[ 0, "asc" ]]
+          , "iDisplayLength":10
+        } );
+    } );
+</script>
+t>
